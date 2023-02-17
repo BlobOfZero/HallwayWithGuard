@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
+
+    //Lose state
+    bool loseState;
+
+    public TextMeshProUGUI loseText;
 
     //Patroling
     public Vector3 walkPoint;
@@ -18,8 +24,10 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player Object").transform;
+        player = GameObject.Find("Cappy").transform;
         agent = GetComponent<NavMeshAgent>();
+        loseState = false;
+        loseText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -67,4 +75,16 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            loseState = true;
+            loseText.gameObject.SetActive(true);
+            player.gameObject.SetActive(false);
+        }
+    }
+
+
 }

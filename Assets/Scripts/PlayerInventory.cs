@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public TextMeshProUGUI winText;
+   public AudioClip keyPickUp;
+   public AudioClip mailDelivered;
+
     private int currentMail;
     private int currentKeys;
     bool winState;
+     public TextMeshProUGUI winText;
 
     public TextMeshProUGUI countText;
+    public TextMeshProUGUI keysText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +24,8 @@ public class PlayerInventory : MonoBehaviour
         winState = false;
         currentKeys = 0;
         winText.gameObject.SetActive(false);
+        countText.text = "Mail Left: " + currentMail;
+        keysText.text = "Key Collected: " + currentKeys;
     }
 
     private void Update()
@@ -26,7 +34,12 @@ public class PlayerInventory : MonoBehaviour
         {
             winState = true;
             winText.gameObject.SetActive(true);
-
+        }
+        
+        if(Input.GetKeyDown(KeyCode.R) && winState == true)
+        {
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            
         }
     }
 
@@ -36,7 +49,8 @@ public class PlayerInventory : MonoBehaviour
         {
             currentMail--;
             other.gameObject.SetActive(false);
-            Debug.Log("mail delivered" + currentMail);
+            countText.text = "Mail left: " + currentMail;
+            Debug.Log("mail delivered: " + currentMail);
         }
 
         if(other.gameObject.CompareTag("Key"))
@@ -44,6 +58,7 @@ public class PlayerInventory : MonoBehaviour
             currentKeys++;
             other.gameObject.SetActive(false);
             Debug.Log("key Collected");
+            keysText.text = "Key collected: " + currentKeys;
         }
         }
     }

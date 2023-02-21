@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     //Patroling
     public Vector3 walkPoint;
-    bool walkPointSet;
+    public bool walkPointSet;
     public float walkPointRange;
 
     //States
@@ -37,6 +38,11 @@ public class EnemyAI : MonoBehaviour
 
         if(!playerInSightRange) Patroling();
         if(playerInSightRange) ChasePlayer();
+
+        if(loseState == true && Input.GetKeyDown(KeyCode.R))
+        {
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        }
     }
 
     private void Patroling()
@@ -82,7 +88,6 @@ public class EnemyAI : MonoBehaviour
         {
             loseState = true;
             loseText.gameObject.SetActive(true);
-            player.gameObject.SetActive(false);
         }
     }
 

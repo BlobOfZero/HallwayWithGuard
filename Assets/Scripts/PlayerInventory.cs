@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerInventory : MonoBehaviour
 {
+
    public AudioClip keyPickUp;
    public AudioClip mailDelivered;
 
@@ -41,6 +43,11 @@ public class PlayerInventory : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
             
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        }
     }
 
   private void OnTriggerEnter(Collider other)
@@ -60,5 +67,5 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log("key Collected");
             keysText.text = "Key collected: " + currentKeys;
         }
-        }
     }
+}

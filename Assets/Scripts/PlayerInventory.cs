@@ -11,6 +11,10 @@ public class PlayerInventory : MonoBehaviour
    public AudioClip keyPickUp;
    public AudioClip mailDelivered;
 
+   public GameObject keyPrefab;
+   public Vector3 keyPrefabLocation;
+   bool keySpawned;
+
     private int currentMail;
     private int currentKeys;
     bool winState;
@@ -18,6 +22,8 @@ public class PlayerInventory : MonoBehaviour
 
     public TextMeshProUGUI countText;
     public TextMeshProUGUI keysText;
+
+    public GameObject winImage;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +34,8 @@ public class PlayerInventory : MonoBehaviour
         winText.gameObject.SetActive(false);
         countText.text = "Mail Left: " + currentMail;
         keysText.text = "Key Collected: " + currentKeys;
+
+        winImage.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -36,17 +44,26 @@ public class PlayerInventory : MonoBehaviour
         {
             winState = true;
             winText.gameObject.SetActive(true);
+            winImage.gameObject.SetActive(true);
         }
         
         if(Input.GetKeyDown(KeyCode.R) && winState == true)
         {
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene("MainMenu");
             
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if(currentMail == 0 && !keySpawned)
+        {
+            GameObject newObject = Instantiate(keyPrefab, keyPrefabLocation, Quaternion.identity) as GameObject; // Instantiate the object
+            newObject.transform.localScale = new Vector3(20, 20, 20); // Change objects local scale
+            Debug.Log("Key spawned");
+            keySpawned = true;
         }
     }
 

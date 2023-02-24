@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class MenuControls : MonoBehaviour
         MainMenuButton();
     }
 
+    void FixedUpdate()
+    {
+        Cursor.visible = true;
+    }
+
     public void PlayNowButton()
     {
+        SceneManager.LoadScene("Game");
         // Play Now Button has been pressed, here you can initialize your game (For example Load a Scene called GameLevel etc.)
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
     }
 
     public void CreditsButton()

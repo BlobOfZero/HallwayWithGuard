@@ -11,8 +11,7 @@ public class EnemyAI : MonoBehaviour
 
     //Lose state
     bool loseState;
-
-    public TextMeshProUGUI loseText;
+    public GameObject loseImage;
 
     //Patroling
     public Vector3 walkPoint;
@@ -28,7 +27,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Cappy").transform;
         agent = GetComponent<NavMeshAgent>();
         loseState = false;
-        loseText.gameObject.SetActive(false);
+        loseImage.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -41,7 +40,7 @@ public class EnemyAI : MonoBehaviour
 
         if(loseState == true && Input.GetKeyDown(KeyCode.R))
         {
-            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
@@ -87,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             loseState = true;
-            loseText.gameObject.SetActive(true);
+            loseImage.gameObject.SetActive(true);
         }
     }
 

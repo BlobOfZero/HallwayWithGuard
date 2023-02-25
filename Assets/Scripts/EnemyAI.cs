@@ -26,6 +26,10 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Cappy").transform;
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
         loseState = false;
         loseImage.gameObject.SetActive(false);
     }

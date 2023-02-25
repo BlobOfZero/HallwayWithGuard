@@ -7,7 +7,7 @@ using System;
 
 public class PlayerInventory : MonoBehaviour
 {
-
+    public MailUI mailBar;
    public AudioClip keyPickUp;
    public AudioClip mailDelivered;
 
@@ -17,13 +17,10 @@ public class PlayerInventory : MonoBehaviour
 
     private int currentMail;
     private int currentKeys;
-    bool winState;
-     public TextMeshProUGUI winText;
-
-    public TextMeshProUGUI countText;
-    public TextMeshProUGUI keysText;
-
+    public bool winState;
     public GameObject winImage;
+
+    public GameObject keyImage;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +28,7 @@ public class PlayerInventory : MonoBehaviour
         currentMail = 3;
         winState = false;
         currentKeys = 0;
-        winText.gameObject.SetActive(false);
-        countText.text = "Mail Left: " + currentMail;
-        keysText.text = "Key Collected: " + currentKeys;
-
+        keyImage.gameObject.SetActive(false);
         winImage.gameObject.SetActive(false);
     }
 
@@ -43,8 +37,9 @@ public class PlayerInventory : MonoBehaviour
         if(currentKeys == 1 && currentMail == 0)
         {
             winState = true;
-            winText.gameObject.SetActive(true);
             winImage.gameObject.SetActive(true);
+            keyImage.gameObject.SetActive(false);
+            
         }
         
         if(Input.GetKeyDown(KeyCode.R) && winState == true)
@@ -72,8 +67,8 @@ public class PlayerInventory : MonoBehaviour
         if (other.gameObject.CompareTag("Mail")) 
         {
             currentMail--;
+            mailBar.setMail(currentMail);
             other.gameObject.SetActive(false);
-            countText.text = "Mail left: " + currentMail;
             Debug.Log("mail delivered: " + currentMail);
         }
 
@@ -81,8 +76,8 @@ public class PlayerInventory : MonoBehaviour
         {
             currentKeys++;
             other.gameObject.SetActive(false);
+            keyImage.gameObject.SetActive(true);
             Debug.Log("key Collected");
-            keysText.text = "Key collected: " + currentKeys;
         }
     }
 }

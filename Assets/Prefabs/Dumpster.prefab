@@ -756,6 +756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5419908910378580896}
+  - component: {fileID: 8832744529703263868}
   m_Layer: 0
   m_Name: Dumpster
   m_TagString: Untagged
@@ -770,9 +771,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4646785576667095322}
-  m_LocalRotation: {x: -0, y: 0.706818, z: -0, w: 0.7073955}
+  m_LocalRotation: {x: 0, y: 0.70681673, z: 0, w: 0.70739675}
   m_LocalPosition: {x: -28.289986, y: 0, z: 21.658197}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2563, y: 1.2563, z: 1.2563}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1332528310556981712}
@@ -792,6 +793,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 89.953, z: 0}
+--- !u!65 &8832744529703263868
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4646785576667095322}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6225734, y: 1.0967818, z: 0.96151143}
+  m_Center: {x: -1.0006088, y: 0.5448609, z: 0.011351808}
 --- !u!1 &5162420744325494141
 GameObject:
   m_ObjectHideFlags: 0
